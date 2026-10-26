@@ -1,0 +1,25 @@
+// Provider is "sqlite" or "postgresql".
+// `bun run db:setup` rewrites it to match DATABASE_URL.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// A stored BPMN diagram. The XML is the source of truth; revision and lock
+/// fields keep the browser and the MCP agent from overwriting each other.
+model Process {
+  id              String    @id
+  name            String
+  xml             String
+  revision        Int       @default(1)
+  lockHolder      String?
+  lockToken       String?
+  lockExpiresAt   DateTime?
+  userActiveUntil DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}

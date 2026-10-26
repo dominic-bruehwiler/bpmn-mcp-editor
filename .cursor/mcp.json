@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bpmn": {
+      "command": "bun",
+      "args": ["src/server/stdio.ts"]
+    }
+  }
+}
